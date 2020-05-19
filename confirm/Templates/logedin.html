@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block containr %}
+<h1>Έχετε συνδεθεί εδώ και <span id="seconds"></span> δευτερόλεπτα.</h1>
+<p> Πατήστε το πλήτρο για να κάνεται επιβεβαίωση </p><form method="post" action="/register/">
+    {% csrf_token %}
+        <button type="submit" name="save" class="btn btn-primary mr-sm-2">Είσοδος </button>
+    </form>
+
+{% endblock containr %}
+
+
+{% block frm %}
+{% endblock frm %}
+
+{% block scrpt %}
+{% endblock scrpt %}

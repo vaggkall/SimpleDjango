@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block containr %}
+{% endblock containr %}
+
+
+{% block frm %}
+    <form method="post" action="/login/">
+    {% csrf_token %}
+    {{form}}
+        <button type="submit" name="save" class="btn btn-primary mr-sm-2">Είσοδος </button>
+    </form>
+{% endblock frm %}
+
+{% block scrpt %}
+{% endblock scrpt %}

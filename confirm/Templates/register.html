@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block containr %}
+{% endblock containr %}
+
+{% block frm %}
+    <form method="post" action="/register/">
+    {% csrf_token %}
+    {{form.as_p}}
+        <button type="submit" name="save" class="btn btn-primary mr-sm-2">Υποβολή </button>
+    </form>
+{% endblock frm %}
+
+{% block scrpt %}
+{% endblock scrpt %}

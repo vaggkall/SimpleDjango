@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block containr %}
+<h1 class="display-3">Καλώς ορίσατε!</h1>
+
+{% if request.user.is_authenticated %}
+<p> Γεια σου {{ username }}. Είσαι συνδεδεμένος <span id="tm" style="display:none">{{ time }}</span><span id="Clock"><span> δεύτερα.<p>
+{% if confirmed == None %}
+<p> Κάνε επιβεβαίωση πατώντας το κουμπί που βρίσκεται ακριβώς από κάτω</p>
+<p>
+    <form method="post" action="/logedin/">
+    {% csrf_token %}
+        <button type="submit" name="save" class="btn btn-primary mr-sm-2">Επιβεβαίωση</button>
+    </form>
+</p>
+{% endif %}
+{% else %}
+<p>Συνδεθείτε για να επιβεβαιώσεται το ραντεβού σας, ή εγγραφείτε αν δεν έχετε λογαριασμό.</p>
+{% endif %}
+{% endblock containr %}
+
+
+{% block frm %}
+{% endblock frm %}
+
+{% block scrpt %}
+{% if request.user.is_authenticated %}
+<script>
+        const e = React.createElement;
+        class Clock extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    time: Number(document.querySelector("#tm").innerText)
+                };
+            }
+
+            componentDidMount() {
+                this.timerID = setInterval(
+                    () => this.tick(),
+                    1000
+                );
+            }
+
+            componentWillUnmount() {
+                clearInterval(this.timerID);
+            }
+
+            tick() {
+                this.state.time++;
+                this.setState({
+                    time: this.state.time
+                })
+            }
+            render() {
+                return (e("span", null," "+ this.state.time.toString()+ " δεύτερα"));
+            }
+        }
+        const domContainer = document.querySelector('#Clock');
+        ReactDOM.render(
+            e(Clock, null, null),
+            domContainer
+        );
+    </script>
+{% endif %}
+{% endblock scrpt %}
